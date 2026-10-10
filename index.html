@@ -17,13 +17,13 @@
             scrollbar-width: none;
         }
         @keyframes modalPop {
-            0% { opacity: 0; transform: scale(0.95); }
-            100% { opacity: 1; transform: scale(1); }
+            0% { opacity: 0; transform: scale(0.96) translateY(10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
         }
         .animate-modal-pop {
-            animation: modalPop 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-        /* CSS untuk Spotlight Glow Card */
+        /* Spotlight Glow Effect */
         .spotlight-card {
             position: relative;
             overflow: hidden;
@@ -32,7 +32,7 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(99, 102, 241, 0.15), transparent 40%);
+            background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(99, 102, 241, 0.18), transparent 50%);
             opacity: 0;
             transition: opacity 0.3s ease;
             pointer-events: none;
@@ -43,33 +43,33 @@
         }
     </style>
 </head>
-<body class="bg-[#0c0c0e] text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white overflow-x-hidden">
+<body class="bg-[#070709] text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white overflow-x-hidden">
 
     <!-- Header -->
-    <header class="max-w-6xl w-full mx-auto px-6 pt-14 pb-4 text-center">
-        <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-indigo-500/10 text-indigo-400 mb-3 border border-indigo-500/20 shadow-xl backdrop-blur-md">
-            <i class="fa-solid fa-compass text-2xl"></i>
+    <header class="max-w-5xl w-full mx-auto px-6 pt-16 pb-6 text-center">
+        <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 mb-4 border border-indigo-500/20 shadow-2xl backdrop-blur-xl">
+            <i class="fa-solid fa-compass text-xl"></i>
         </div>
-        <h1 class="text-3xl font-semibold tracking-tight text-slate-100 mb-2">
-            Web Launcher Hub
+        <h1 class="text-3xl font-bold tracking-tight text-slate-100 mb-2">
+            pisdontol
         </h1>
-        <p class="text-slate-400 text-xs mb-6 max-w-sm mx-auto">Arahkan kursor ke kartu untuk melihat efek Spotlight Glow interaktif.</p>
+        <p class="text-slate-400 text-xs tracking-wide mb-8">Arahkan kursor ke kartu untuk mengaktifkan Spotlight Glow.</p>
         
         <!-- Search Input -->
-        <div class="relative max-w-md mx-auto">
+        <div class="relative max-w-sm mx-auto">
             <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
             <input type="text" id="searchInput" oninput="filterShortcuts()" placeholder="Cari shortcut web..." 
-                   class="w-full bg-[#121215] text-slate-200 placeholder-slate-500 pl-11 pr-4 py-3 rounded-2xl border border-slate-800 text-xs focus:outline-none focus:border-indigo-500/60 focus:ring-4 focus:ring-indigo-500/10 transition-all shadow-inner">
+                   class="w-full bg-[#111115] text-slate-200 placeholder-slate-500 pl-11 pr-4 py-3 rounded-2xl border border-white/5 text-xs focus:outline-none focus:border-indigo-500/60 focus:ring-4 focus:ring-indigo-500/10 transition-all shadow-inner">
         </div>
     </header>
 
     <!-- Main Section: Carousel Container -->
-    <main class="max-w-7xl w-full mx-auto px-4 flex-grow flex flex-col justify-center my-auto pb-12">
+    <main class="max-w-6xl w-full mx-auto px-4 flex-grow flex flex-col justify-center my-auto pb-12">
         
         <!-- Header & Action Button -->
         <div class="flex justify-between items-center mb-4 px-6">
-            <span class="text-xs font-medium text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span> Koleksi Utama
+            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span> Koleksi Utama
             </span>
             <button onclick="openModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2.5 rounded-xl text-xs font-medium transition-all duration-300 flex items-center gap-1.5 shadow-lg shadow-indigo-600/20 active:scale-95">
                 <i class="fa-solid fa-plus text-[10px]"></i> Tambah Web
@@ -77,50 +77,50 @@
         </div>
 
         <!-- Carousel Wrapper -->
-        <div class="relative px-4" id="carouselWrapper">
+        <div class="relative px-2" id="carouselWrapper">
             <!-- Track / List Kartu Horizontal -->
-            <div id="carouselTrack" class="flex gap-6 overflow-x-auto no-scrollbar py-6 px-2">
+            <div id="carouselTrack" class="flex gap-5 overflow-x-auto no-scrollbar py-6 px-2">
                 <!-- Card item akan di-render otomatis lewat JS -->
             </div>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="text-center py-6 text-slate-600 text-xs border-t border-slate-900/60">
+    <footer class="text-center py-6 text-slate-600 text-[11px] border-t border-white/5">
         Spotlight Glow & Velocity 15 Architecture
     </footer>
 
     <!-- Modal Form -->
-    <div id="modal" class="fixed inset-0 bg-black/70 backdrop-blur-md hidden flex items-center justify-center p-4 z-50 transition-all">
-        <div class="bg-[#121215] rounded-3xl p-8 w-full max-w-lg border border-slate-800 shadow-2xl relative animate-modal-pop">
-            <h3 id="modalTitle" class="text-xl font-semibold text-slate-100 mb-6">Tambah Web Baru</h3>
+    <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4 z-50 transition-all">
+        <div class="bg-[#111115] rounded-3xl p-8 w-full max-w-md border border-white/10 shadow-2xl relative animate-modal-pop">
+            <h3 id="modalTitle" class="text-lg font-semibold text-slate-100 mb-6">Tambah Web Baru</h3>
             
-            <form id="shortcutForm" onsubmit="saveShortcut(event)" class="space-y-5">
+            <form id="shortcutForm" onsubmit="saveShortcut(event)" class="space-y-4">
                 <input type="hidden" id="shortcutId">
                 
                 <div>
                     <label class="block text-xs font-medium text-slate-400 mb-2">Nama Web</label>
                     <input type="text" id="titleInput" required placeholder="Contoh: GitHub" 
-                           class="w-full bg-[#0c0c0e] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all">
+                           class="w-full bg-[#070709] border border-white/5 rounded-xl px-4 py-3 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all">
                 </div>
 
                 <div>
                     <label class="block text-xs font-medium text-slate-400 mb-2">URL / Link Web</label>
                     <input type="url" id="urlInput" required placeholder="https://github.com" 
-                           class="w-full bg-[#0c0c0e] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all">
+                           class="w-full bg-[#070709] border border-white/5 rounded-xl px-4 py-3 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all">
                 </div>
 
                 <div>
                     <label class="block text-xs font-medium text-slate-400 mb-2">URL Gambar Preview (Opsional)</label>
                     <input type="url" id="imageInput" placeholder="https://images.unsplash.com/..." 
-                           class="w-full bg-[#0c0c0e] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all">
+                           class="w-full bg-[#070709] border border-white/5 rounded-xl px-4 py-3 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all">
                 </div>
 
-                <div class="flex justify-end gap-3 pt-4">
-                    <button type="button" onclick="closeModal()" class="px-5 py-3.5 bg-slate-800/50 hover:bg-slate-800 rounded-xl text-xs font-medium text-slate-300 transition-colors">
+                <div class="flex justify-end gap-3 pt-3">
+                    <button type="button" onclick="closeModal()" class="px-4 py-3 bg-white/5 hover:bg-white/10 rounded-xl text-xs font-medium text-slate-300 transition-colors">
                         Batal
                     </button>
-                    <button type="submit" class="px-6 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-medium shadow-lg shadow-indigo-600/20 transition-all">
+                    <button type="submit" class="px-5 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-medium shadow-lg shadow-indigo-600/20 transition-all">
                         Simpan
                     </button>
                 </div>
@@ -157,13 +157,13 @@
 
             items.forEach((item) => {
                 const card = document.createElement('div');
-                card.className = "spotlight-card min-w-[360px] max-w-[360px] bg-[#121215] border border-slate-800/80 rounded-3xl overflow-hidden flex flex-col relative group shrink-0 transition-all duration-300 hover:border-indigo-500/60 hover:shadow-2xl hover:shadow-indigo-500/10 hover:scale-[1.02]";
+                card.className = "spotlight-card min-w-[340px] max-w-[340px] bg-[#111115] border border-white/5 rounded-3xl overflow-hidden flex flex-col relative group shrink-0 transition-all duration-300 hover:border-indigo-500/50 hover:shadow-2xl hover:shadow-indigo-500/10 hover:scale-[1.02]";
                 
                 const imgUrl = item.image || `https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=600&auto=format&fit=crop`;
 
                 card.innerHTML = `
                     <!-- Action Buttons -->
-                    <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 flex gap-1 z-10 bg-black/70 rounded-xl p-1.5 backdrop-blur-md border border-white/10 shadow-lg">
+                    <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 flex gap-1 z-10 bg-black/75 rounded-xl p-1.5 backdrop-blur-xl border border-white/10 shadow-lg">
                         <button onclick="editShortcut(${item.id})" class="text-slate-300 hover:text-indigo-400 p-1.5 text-xs transition-colors">
                             <i class="fa-solid fa-pen"></i>
                         </button>
@@ -175,27 +175,25 @@
                     <!-- Link Card -->
                     <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="flex flex-col h-full pointer-events-auto relative z-20">
                         <!-- Preview Image Container -->
-                        <div class="w-full h-56 bg-[#0c0c0e] overflow-hidden relative">
+                        <div class="w-full h-52 bg-[#070709] overflow-hidden relative">
                             <img src="${imgUrl}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#121215] via-transparent to-transparent opacity-50"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#111115] via-transparent to-transparent opacity-40"></div>
                         </div>
                         
                         <!-- Card Footer / Title -->
-                        <div class="p-5 bg-[#121215] flex items-center justify-between">
-                            <span class="font-medium text-slate-200 text-sm truncate pr-2">${item.title}</span>
-                            <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-indigo-600/20 group-hover:text-indigo-400 transition-all">
-                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:text-indigo-400"></i>
+                        <div class="p-4 bg-[#111115] flex items-center justify-between">
+                            <span class="font-medium text-slate-200 text-xs truncate pr-2">${item.title}</span>
+                            <div class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-indigo-600/20 group-hover:text-indigo-400 transition-all shrink-0">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-400 group-hover:text-indigo-400"></i>
                             </div>
                         </div>
                     </a>
                 `;
                 track.appendChild(card);
             });
-            // Re-init spotlight listener setelah render ulang
             initSpotlightGlow();
         }
 
-        // Efek Cahaya Mengikuti Kursor (Spotlight Glow)
         function initSpotlightGlow() {
             const cards = document.querySelectorAll('.spotlight-card');
             cards.forEach(card => {
@@ -209,7 +207,6 @@
             });
         }
 
-        // Kecepatan Geser Carousel (Velocity 15)
         function initSpeed15HoverScroll() {
             const wrapper = document.getElementById('carouselWrapper');
             const track = document.getElementById('carouselTrack');
